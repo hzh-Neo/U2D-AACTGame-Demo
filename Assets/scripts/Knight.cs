@@ -149,4 +149,10 @@ public class Knight : MonoBehaviour
 
         rotateBodyListener();
     }
+
+    public void onHit(float damage, Vector2 hitVect)
+    {
+        anim.SetTrigger(AnimationString.hit);
+        body.velocity = new Vector2(hitVect.x, hitVect.y);
+    }
 }

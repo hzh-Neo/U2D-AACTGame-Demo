@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 using enums;
+using UnityEditor.Overlays;
 
 
 [RequireComponent(typeof(CapsuleCollider2D), typeof(BodyTouching))]
@@ -16,8 +17,9 @@ public class PlayerController : MonoBehaviour
     public float jumpHeight = 7.7f;
     private bool _isFacingRight = true;
     private bool IsReverseSide;
-
-
+    public bool lockPosition = false;
+    private float hitTime = 0.75f;
+    private bool hitTimer;
     BodyTouching bodyTouching;
     private bool isFacingRight
     {
@@ -53,6 +55,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 inputControll;
     private bool isWalking;
     private bool isShitfDonw;
+    private Timer timer;
     public int playerGroundState
     {
         get
@@ -76,7 +79,7 @@ public class PlayerController : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         bodyTouching = GetComponent<BodyTouching>();
-
+        timer = gameObject.AddComponent<Timer>();
     }
 
     // Update is called once per frame
@@ -105,7 +108,11 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void GroundMove()
     {
-        body.velocity = new Vector2(inputControll.x * playerSpeed, body.velocity.y);
+        if (!lockPosition)
+        {
+            body.velocity = new Vector2(inputControll.x * playerSpeed, body.velocity.y);
+        }
+       
     }
 
     /// <summary>
@@ -129,7 +136,7 @@ public class PlayerController : MonoBehaviour
             ReverseJump();
             return;
         }
-        if (!bodyTouching.IsSideTouch)
+        if (!bodyTouching.IsSideTouch&&!lockPosition)
         {
             GroundMove();
         }
@@ -155,7 +162,7 @@ public class PlayerController : MonoBehaviour
 
     private void setPlayerWalk()
     {
-        if (bodyTouching.IsGround)
+        if (bodyTouching.IsGround&&!lockPosition)
         {
             playerSpeed = walkSpeed;
             playerGroundState = (int)playerGroundStateEnum.walk;
@@ -269,4 +276,22 @@ public class PlayerController : MonoBehaviour
 
         }
     }
+
+    public void onHit(float damage, Vector2 hitVect)
+    {
+        lockPosition = true;
+        int tNum = transform.localScale.x > 0 ? -1 : 1;
+        body.velocity = new Vector2(hitVect.x * tNum, body.velocity.y + hitVect.y);
+        anim.SetTrigger(AnimationString.hit);
+        if (!hitTimer)
+        {
+            hitTimer = timer.StartTimer(hitTime, () =>
+            {
+                hitTimer = false;
+                lockPosition = false;
+            });
+        }
+  
+    }
+
 }

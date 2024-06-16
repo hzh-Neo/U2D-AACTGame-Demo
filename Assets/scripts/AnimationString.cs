@@ -14,6 +14,7 @@ internal class AnimationString
     internal static readonly string IsSideTouch = "IsSideTouch";
     internal static readonly string IsCeiling = "IsCeiling";
     internal static readonly string attack_1 = "attack_1";
+    internal static readonly string hit = "hit";
     internal static readonly string death = "death";
 }
 

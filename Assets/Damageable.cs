@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Damageable : MonoBehaviour
 {
+    [SerializeField]
     private float _maxHealth = 100;
 
-    private Animator anim;
+    public UnityEvent<float, Vector2> unityEvent;
 
     public float maxHealth
     {
@@ -20,8 +22,8 @@ public class Damageable : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    public float health=100;
+
+    public float health;
 
     public bool IsAlive
     {
@@ -31,10 +33,14 @@ public class Damageable : MonoBehaviour
 
     private bool IsInvincible;
 
-    private float InvincibleTime;
+    private bool IsPlayer;
+
+    public float InvincibleTime;
+
+    private Renderer rend;
 
     [SerializeField]
-    public float defaultInvincibleTime=2f;
+    public float defaultInvincibleTime = 2.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -45,8 +51,9 @@ public class Damageable : MonoBehaviour
     private void Awake()
     {
         health = maxHealth;
-        anim = GetComponent<Animator>();
         InvincibleTime = defaultInvincibleTime;
+        IsPlayer = gameObject.name == "player";
+        rend = GetComponent<Renderer>();
     }
 
     // Update is called once per frame
@@ -59,9 +66,14 @@ public class Damageable : MonoBehaviour
     {
         if (IsInvincible)
         {
+            if (IsPlayer)
+            {
+                rend.enabled = !rend.enabled;
+            }
             InvincibleTime -= Time.deltaTime;
             if (InvincibleTime <= 0)
             {
+                rend.enabled = true;
                 IsInvincible = false;
                 InvincibleTime = defaultInvincibleTime;
             }
@@ -76,12 +88,16 @@ public class Damageable : MonoBehaviour
     /// ÊÜÉË
     /// </summary>
     /// <param name="damage"></param>
-    public void onHit(float damage)
+    public void onHit(float damage, Vector2 hitVect)
     {
-        if (health > 0&&!IsInvincible)
+        if (health > 0)
         {
-            health -= damage;
-            IsInvincible = true;
+            if (!IsInvincible)
+            {
+                health -= damage;
+                IsInvincible = true;
+                unityEvent?.Invoke(damage, hitVect);
+            }
         }
     }
 
