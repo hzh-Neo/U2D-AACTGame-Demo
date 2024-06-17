@@ -11,10 +11,10 @@ using UnityEditor.Overlays;
 public class PlayerController : MonoBehaviour
 {
     public Damageable damageable;
-    public float playerSpeed = 5f;
-    public float walkSpeed = 5f;
+    public float playerSpeed = 6f;
+    public float walkSpeed = 6f;
     public float runningSpeed = 8f;
-    public float jumpHeight = 7.7f;
+    public float jumpHeight = 8.6f;
     private bool _isFacingRight = true;
     private bool IsReverseSide;
     public bool lockPosition = false;

@@ -22,6 +22,10 @@ public class Damageable : MonoBehaviour
         }
     }
 
+    private float deathTime;
+
+    [SerializeField]
+    public float defaultDeathTime = 2f;
 
     public float health;
 
@@ -42,6 +46,7 @@ public class Damageable : MonoBehaviour
     [SerializeField]
     public float defaultInvincibleTime = 2.5f;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +59,7 @@ public class Damageable : MonoBehaviour
         InvincibleTime = defaultInvincibleTime;
         IsPlayer = gameObject.name == "player";
         rend = GetComponent<Renderer>();
+        deathTime = defaultDeathTime;
     }
 
     // Update is called once per frame
@@ -68,16 +74,41 @@ public class Damageable : MonoBehaviour
         {
             if (IsPlayer)
             {
-                rend.enabled = !rend.enabled;
+                toggleEnable();
             }
-            InvincibleTime -= Time.deltaTime;
-            if (InvincibleTime <= 0)
-            {
-                rend.enabled = true;
-                IsInvincible = false;
-                InvincibleTime = defaultInvincibleTime;
-            }
+            ExitInvincible();
         }
+        if (!IsPlayer && !IsAlive)
+        {
+            TranslateDeath();
+        }
+    }
+
+    private void ExitInvincible()
+    {
+        InvincibleTime -= Time.deltaTime;
+        if (InvincibleTime <= 0)
+        {
+            rend.enabled = true;
+            IsInvincible = false;
+            InvincibleTime = defaultInvincibleTime;
+        }
+    }
+
+    private void TranslateDeath()
+    {
+
+        toggleEnable();
+        deathTime -= Time.deltaTime;
+        if (deathTime <= 0)
+        {
+            rend.enabled = false;
+        }
+    }
+
+    private void toggleEnable()
+    {
+        rend.enabled = !rend.enabled;
     }
 
     private void FixedUpdate()
@@ -95,7 +126,10 @@ public class Damageable : MonoBehaviour
             if (!IsInvincible)
             {
                 health -= damage;
-                IsInvincible = true;
+                if (IsPlayer)
+                {
+                    IsInvincible = true;
+                }
                 unityEvent?.Invoke(damage, hitVect);
             }
         }

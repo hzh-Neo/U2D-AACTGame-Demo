@@ -1,5 +1,107 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2432665131876051349
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8940573427416343198}
+  - component: {fileID: 536931562039627093}
+  - component: {fileID: 5465542366447642067}
+  m_Layer: 0
+  m_Name: attack_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8940573427416343198
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2432665131876051349}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3918339763106452514}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &536931562039627093
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2432665131876051349}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.002746915, y: 0.15280187}
+      - {x: 0.11614962, y: 0.073705554}
+      - {x: 0.16816738, y: 0.008215155}
+      - {x: 0.114719875, y: -0.014015555}
+      - {x: -0.010947466, y: -0.007531166}
+      - {x: -0.0093354285, y: -0.07337922}
+      - {x: 0.14636298, y: -0.07364279}
+      - {x: 0.22875355, y: -0.03856722}
+      - {x: 0.24168289, y: 0.032086313}
+      - {x: 0.20940825, y: 0.080456406}
+  m_UseDelaunayMesh: 0
+--- !u!114 &5465542366447642067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2432665131876051349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 182f6b88bb2815a48a16295cbc71d473, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttackNum: 10
+  hitVect: {x: 0, y: 0}
 --- !u!1 &7223293515743633636
 GameObject:
   m_ObjectHideFlags: 0
@@ -36,7 +138,8 @@ Transform:
   m_LocalPosition: {x: -2.32, y: -2.99, z: 0.040501874}
   m_LocalScale: {x: 6.161484, y: 5.8432584, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8940573427416343198}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1139071026900145421
@@ -130,11 +233,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffe6b98a50eb77948982767ac9d708ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageable: {fileID: 0}
+  damageable: {fileID: 3475011019319779501}
   playerSpeed: 5
   walkSpeed: 5
   runningSpeed: 8
-  jumpHeight: 7.7
+  jumpHeight: 8.3
+  lockPosition: 0
 --- !u!114 &41546751244599674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,6 +348,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 79be1fa0-9d93-4c8a-8902-fec30f86aaad
     m_ActionName: Player/Run[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 91b8b589-6890-4586-8558-17671a5258f2
+    m_ActionName: Player/Jump[/Keyboard/upArrow]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -283,8 +391,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
+  unityEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  defaultDeathTime: 0
   health: 100
   InvincibleTime: 0.25
+  defaultInvincibleTime: 2.5
 --- !u!70 &5150425567596081630
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

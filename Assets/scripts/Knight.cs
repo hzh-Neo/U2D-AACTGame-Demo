@@ -22,6 +22,10 @@ public class Knight : MonoBehaviour
     private Animator anim;
     private Timer timer;
     Rigidbody2D body;
+
+    public bool lockPosition = false;
+    private float hitTime = 0.75f;
+    private bool hitTimer;
     private bool IsAttack
     {
         get
@@ -75,7 +79,7 @@ public class Knight : MonoBehaviour
                 StartAttack();
             }
         }
-        if (IsMoving&&damageable.IsAlive)
+        if (IsMoving && damageable.IsAlive)
         {
             Moving();
         }
@@ -137,6 +141,7 @@ public class Knight : MonoBehaviour
 
     private void rotateBodyListener()
     {
+
         if (checkTouching.IsSideTouch)
         {
             Methods.rotateBody(transform);
@@ -146,13 +151,33 @@ public class Knight : MonoBehaviour
     private void FixedUpdate()
     {
         checkTouching.CheckIsTouching(capsuleCollider2, gameObject, contactFilter);
+  
+    }
 
-        rotateBodyListener();
+    private void LateUpdate()
+    {
+        if (!lockPosition)
+        {
+            rotateBodyListener();
+        }
     }
 
     public void onHit(float damage, Vector2 hitVect)
     {
-        anim.SetTrigger(AnimationString.hit);
-        body.velocity = new Vector2(hitVect.x, hitVect.y);
+        lockPosition = true;
+        body.velocity = new Vector2(hitVect.x , body.velocity.y + hitVect.y);
+        anim.SetTrigger(KnightAnimations.hit);
+        if (detectionCheck && detectionCheck.EnterColliders2D.Count == 0)
+        {
+            Methods.rotateBody(transform);
+        }
+        if (!hitTimer)
+        {
+            hitTimer = timer.StartTimer(hitTime, () =>
+            {
+                hitTimer = false;
+                lockPosition = false;
+            });
+        }
     }
 }
