@@ -131,6 +131,7 @@ public class Damageable : MonoBehaviour
                     IsInvincible = true;
                 }
                 unityEvent?.Invoke(damage, hitVect);
+                CharactersEvents.characterDamage.Invoke(gameObject, damage);
             }
         }
     }

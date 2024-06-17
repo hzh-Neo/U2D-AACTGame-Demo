@@ -10,6 +10,8 @@ public class Knight : MonoBehaviour
     //¹¥»÷ÅÐ¶ÏÇøÓò
     public DetectionCheck detectionCheck;
 
+    public CliffDetection cliffDetection;
+
     public ContactFilter2D contactFilter;
 
     public float walkSpeed = 3f;
@@ -141,17 +143,21 @@ public class Knight : MonoBehaviour
 
     private void rotateBodyListener()
     {
-
         if (checkTouching.IsSideTouch)
         {
             Methods.rotateBody(transform);
         }
     }
 
+    public void onCliff()
+    {
+        Methods.rotateBody(transform);
+    }
+
     private void FixedUpdate()
     {
         checkTouching.CheckIsTouching(capsuleCollider2, gameObject, contactFilter);
-  
+
     }
 
     private void LateUpdate()
@@ -165,7 +171,7 @@ public class Knight : MonoBehaviour
     public void onHit(float damage, Vector2 hitVect)
     {
         lockPosition = true;
-        body.velocity = new Vector2(hitVect.x , body.velocity.y + hitVect.y);
+        body.velocity = new Vector2(hitVect.x, body.velocity.y + hitVect.y);
         anim.SetTrigger(KnightAnimations.hit);
         if (detectionCheck && detectionCheck.EnterColliders2D.Count == 0)
         {
