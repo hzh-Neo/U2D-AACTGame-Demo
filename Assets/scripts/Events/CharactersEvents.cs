@@ -8,5 +8,6 @@ using UnityEngine.Events;
 
 public class CharactersEvents
 {
-    public static UnityEvent<GameObject, float> characterDamage;
+    public static UnityAction<GameObject, float> characterDamage;
+    public static UnityAction<GameObject, float> characterHealth;
 }

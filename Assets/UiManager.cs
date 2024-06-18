@@ -1,24 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UiManager : MonoBehaviour
 {
     public Canvas gameCanvas;
+    public TextMeshProUGUI textMeshPro;
+    public TextMeshProUGUI healthMeshPro;
 
     private void Awake()
     {
         gameCanvas = FindObjectOfType<Canvas>();
     }
-    // Start is called before the first frame update
-    void Start()
+
+    private void OnEnable()
     {
+        CharactersEvents.characterDamage += onCharacterDamage;
+        CharactersEvents.characterHealth += onCharacterHealth;
+    }
+
+    private void OnDisable()
+    {
+        CharactersEvents.characterDamage -= onCharacterDamage;
+        CharactersEvents.characterHealth -= onCharacterHealth;
+    }
+
+    private void onCharacterDamage(GameObject character,float damage)
+    {
+       Vector3 position=Camera.main.WorldToScreenPoint(character.transform.position);
+        TMP_Text text = Instantiate(textMeshPro,position,Quaternion.identity,gameCanvas.transform).GetComponent<TMP_Text>();
+        text.text=damage.ToString();
+
 
     }
 
-    // Update is called once per frame
-    void Update()
+    private void onCharacterHealth(GameObject character, float health)
     {
-
+        Vector3 position = Camera.main.WorldToScreenPoint(character.transform.position);
+        TMP_Text text = Instantiate(healthMeshPro, position, Quaternion.identity, gameCanvas.transform).GetComponent<TMP_Text>();
+        text.text = health.ToString();
     }
 }

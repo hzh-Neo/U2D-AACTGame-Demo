@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
         {
             if (_isFacingRight != value)
             {
+                
                 if (damageable.IsAlive)
                 {
                     Methods.rotateBody(transform);
@@ -112,7 +113,7 @@ public class PlayerController : MonoBehaviour
         {
             body.velocity = new Vector2(inputControll.x * playerSpeed, body.velocity.y);
         }
-       
+
     }
 
     /// <summary>
@@ -136,7 +137,7 @@ public class PlayerController : MonoBehaviour
             ReverseJump();
             return;
         }
-        if (!bodyTouching.IsSideTouch&&!lockPosition)
+        if (!bodyTouching.IsSideTouch && !lockPosition)
         {
             GroundMove();
         }
@@ -162,7 +163,7 @@ public class PlayerController : MonoBehaviour
 
     private void setPlayerWalk()
     {
-        if (bodyTouching.IsGround&&!lockPosition)
+        if (bodyTouching.IsGround && !lockPosition)
         {
             playerSpeed = walkSpeed;
             playerGroundState = (int)playerGroundStateEnum.walk;
@@ -277,6 +278,32 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void onAttack2(InputAction.CallbackContext context)
+    {
+        if (!damageable.IsAlive)
+        {
+            return;
+        }
+        if (context.started)
+        {
+            if (!bodyTouching.IsSideTouch)
+            {
+                if (bodyTouching.IsGround)
+                {
+                    anim.SetTrigger(AnimationString.attack_2);
+                }
+                else
+                {
+                    anim.SetTrigger(AnimationString.attack_2);
+                }
+            }
+        }
+        else
+        {
+
+        }
+    }
+
     public void onHit(float damage, Vector2 hitVect)
     {
         lockPosition = true;
@@ -291,7 +318,18 @@ public class PlayerController : MonoBehaviour
                 lockPosition = false;
             });
         }
-  
+
+    }
+
+    public void onHeal(float health)
+    {
+        if (damageable.IsAlive)
+        {
+
+            CharactersEvents.characterHealth.Invoke(gameObject, Mathf.Min(damageable.maxHealth - damageable.health, health));
+            damageable.health = Mathf.Min(damageable.health + health, damageable.maxHealth);
+
+        }
     }
 
 }
