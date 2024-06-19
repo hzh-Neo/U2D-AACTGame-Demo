@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Attack : MonoBehaviour
 {
     [SerializeField]
     public float AttackNum = 10;
+
+    public bool IsFarAttack = false;
+
+    public GameObject DestoryObj;
 
     [SerializeField]
     public Vector2 hitVect = Vector2.zero;
@@ -15,7 +20,11 @@ public class Attack : MonoBehaviour
         Damageable damageable = collision.GetComponent<Damageable>();
         if (damageable && damageable.IsAlive)
         {
-            damageable.onHit(AttackNum, hitVect);
+            damageable.onHit(AttackNum, hitVect, IsFarAttack);
+            if (gameObject)
+            {
+                Destroy(DestoryObj);
+            }
         }
     }
 

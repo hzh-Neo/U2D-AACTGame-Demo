@@ -40,7 +40,9 @@ AnimatorState:
   - {fileID: 4159673339138756113}
   - {fileID: 1527898477867547305}
   - {fileID: 6742053276604319949}
-  m_StateMachineBehaviours: []
+  - {fileID: 42406163188435140}
+  m_StateMachineBehaviours:
+  - {fileID: 6477581957647943651}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -560,7 +562,7 @@ AnimatorStateMachine:
     m_Position: {x: 330, y: 190, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9022947185348624244}
-    m_Position: {x: 940, y: 190, z: 0}
+    m_Position: {x: 930, y: 210, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -843,7 +845,7 @@ AnimatorStateMachine:
     m_Position: {x: 630, y: 30, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: -4097123401760435886}
-    m_Position: {x: 650, y: 200, z: 0}
+    m_Position: {x: 640, y: 200, z: 0}
   m_AnyStateTransitions:
   - {fileID: -172779159827160983}
   - {fileID: -3280239970631096383}
@@ -1127,6 +1129,31 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+--- !u!1101 &42406163188435140
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: attack_2
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -9022947185348624244}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.75
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &697231660130370021
 AnimatorState:
   serializedVersion: 6
@@ -1674,6 +1701,19 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &6477581957647943651
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2483590a408b77246a711ff084e5e103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ArrowPrefab: {fileID: 1311560932040181067, guid: f868e96dce23ed64399e5fcca782c9a4, type: 3}
 --- !u!1101 &6526065784494571482
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

@@ -168,12 +168,12 @@ public class Knight : MonoBehaviour
         }
     }
 
-    public void onHit(float damage, Vector2 hitVect)
+    public void onHit(float damage, Vector2 hitVect, bool IsFarAttack = false)
     {
         lockPosition = true;
         body.velocity = new Vector2(hitVect.x, body.velocity.y + hitVect.y);
         anim.SetTrigger(KnightAnimations.hit);
-        if (detectionCheck && detectionCheck.EnterColliders2D.Count == 0)
+        if (detectionCheck && detectionCheck.EnterColliders2D.Count == 0&&!IsFarAttack)
         {
             Methods.rotateBody(transform);
         }

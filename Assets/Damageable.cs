@@ -8,7 +8,7 @@ public class Damageable : MonoBehaviour
     [SerializeField]
     private float _maxHealth = 100;
 
-    public UnityEvent<float, Vector2> unityEvent;
+    public UnityEvent<float, Vector2,bool> unityEvent;
 
     public float maxHealth
     {
@@ -119,7 +119,7 @@ public class Damageable : MonoBehaviour
     ///  ‹…À
     /// </summary>
     /// <param name="damage"></param>
-    public void onHit(float damage, Vector2 hitVect)
+    public void onHit(float damage, Vector2 hitVect,bool IsFarAttack=false)
     {
         if (health > 0)
         {
@@ -130,7 +130,7 @@ public class Damageable : MonoBehaviour
                 {
                     IsInvincible = true;
                 }
-                unityEvent?.Invoke(damage, hitVect);
+                unityEvent?.Invoke(damage, hitVect, IsFarAttack);
                 CharactersEvents.characterDamage.Invoke(gameObject, damage);
             }
         }

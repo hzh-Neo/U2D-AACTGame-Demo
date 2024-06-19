@@ -304,7 +304,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void onHit(float damage, Vector2 hitVect)
+    public void onHit(float damage, Vector2 hitVect, bool IsFarAttack = false)
     {
         lockPosition = true;
         int tNum = transform.localScale.x > 0 ? -1 : 1;

@@ -11,13 +11,13 @@ public class healthFood : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        eaterEvent?.Invoke( healthNum);
+        eaterEvent?.Invoke(healthNum);
         Destroy(gameObject);
     }
 
     private void Update()
     {
-        transform.eulerAngles += rotateVector*Time.deltaTime;
+        transform.eulerAngles += rotateVector * Time.deltaTime;
     }
 
 

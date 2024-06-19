@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackNum: 20
+  IsFarAttack: 0
+  DestoryObj: {fileID: 0}
   hitVect: {x: 0, y: 0}
 --- !u!60 &8838094737201356454
 PolygonCollider2D:
@@ -205,6 +207,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackNum: 10
+  IsFarAttack: 0
+  DestoryObj: {fileID: 0}
   hitVect: {x: 0, y: 0}
 --- !u!1 &4042716364966943425
 GameObject:
@@ -252,6 +256,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackNum: 12
+  IsFarAttack: 0
+  DestoryObj: {fileID: 0}
   hitVect: {x: 0, y: 0}
 --- !u!60 &5715370841289198242
 PolygonCollider2D:
@@ -351,6 +357,7 @@ Transform:
   - {fileID: 8940573427416343198}
   - {fileID: 1324328122535446796}
   - {fileID: 3735321437788491393}
+  - {fileID: 6627561293946933583}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1139071026900145421
@@ -563,6 +570,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 91b8b589-6890-4586-8558-17671a5258f2
     m_ActionName: Player/Jump[/Keyboard/upArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bd7304e2-7c69-4c3a-8c5a-80bf0c7157c6
+    m_ActionName: Player/Attack2[/Keyboard/x]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -658,14 +669,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contactFilter:
     useTriggers: 0
-    useLayerMask: 0
+    useLayerMask: 1
     useDepth: 0
     useOutsideDepth: 0
     useNormalAngle: 0
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 64
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
@@ -673,3 +684,49 @@ MonoBehaviour:
   _IsGround: 0
   IsLeftWall: 0
   IsRightWall: 0
+--- !u!1001 &1067848655136230175
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3918339763106452514}
+    m_Modifications:
+    - target: {fileID: 1311560932040181067, guid: f868e96dce23ed64399e5fcca782c9a4, type: 3}
+      propertyPath: m_Name
+      value: ArrowAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311560932040181067, guid: f868e96dce23ed64399e5fcca782c9a4, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6136173529190881872, guid: f868e96dce23ed64399e5fcca782c9a4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.163
+      objectReference: {fileID: 0}
+    - target: {fileID: 6136173529190881872, guid: f868e96dce23ed64399e5fcca782c9a4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.064
+      objectReference: {fileID: 0}
+    - target: {fileID: 6136173529190881872, guid: f868e96dce23ed64399e5fcca782c9a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6136173529190881872, guid: f868e96dce23ed64399e5fcca782c9a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6136173529190881872, guid: f868e96dce23ed64399e5fcca782c9a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 228.4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f868e96dce23ed64399e5fcca782c9a4, type: 3}
+--- !u!4 &6627561293946933583 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6136173529190881872, guid: f868e96dce23ed64399e5fcca782c9a4, type: 3}
+  m_PrefabInstance: {fileID: 1067848655136230175}
+  m_PrefabAsset: {fileID: 0}

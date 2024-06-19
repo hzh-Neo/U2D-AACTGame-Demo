@@ -19,12 +19,22 @@ internal class AnimationString
     internal static readonly string attack_2= "attack_2";
 }
 
-internal static class KnightAnimations
+internal class KnightAnimations
 {
     internal static readonly string Attack1 = "attack_1";
     internal static readonly string hit = "hit";
     internal static readonly string isMoving = "isMoving";
     internal static readonly float attackWaitTime =2.0f;
+    internal static readonly float attackTime = 1f;
+    internal static readonly string death = "death";
+}
+
+internal class FlyingEyeAnimations
+{
+    internal static readonly string Attack1 = "attack_1";
+    internal static readonly string hit = "hit";
+    internal static readonly string isMoving = "isMoving";
+    internal static readonly float attackWaitTime = 2.0f;
     internal static readonly float attackTime = 1f;
     internal static readonly string death = "death";
 }
