@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class UiManager : MonoBehaviour
 {
@@ -40,5 +41,10 @@ public class UiManager : MonoBehaviour
         Vector3 position = Camera.main.WorldToScreenPoint(character.transform.position);
         TMP_Text text = Instantiate(healthMeshPro, position, Quaternion.identity, gameCanvas.transform).GetComponent<TMP_Text>();
         text.text = health.ToString();
+    }
+
+    private void onExitGame(InputAction.CallbackContext context)
+    {
+
     }
 }

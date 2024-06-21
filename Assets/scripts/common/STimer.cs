@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using System.Collections;
 
-public class Timer : MonoBehaviour
+public class STimer : MonoBehaviour
 {
     public delegate void TimerCallback();
 

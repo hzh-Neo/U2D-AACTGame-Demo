@@ -10,6 +10,7 @@ public class Damageable : MonoBehaviour
 
     public UnityEvent<float, Vector2,bool> unityEvent;
 
+    public UnityEvent<float,float> healthChange;
     public float maxHealth
     {
         get
@@ -27,7 +28,19 @@ public class Damageable : MonoBehaviour
     [SerializeField]
     public float defaultDeathTime = 2f;
 
-    public float health;
+    private float _health;
+    public float health
+    {
+        get
+        {
+            return _health;
+        }
+        set {
+            _health = value;
+            healthChange?.Invoke(_health, maxHealth);
+        }
+    }
+        
 
     public bool IsAlive
     {
@@ -60,6 +73,7 @@ public class Damageable : MonoBehaviour
         IsPlayer = gameObject.name == "player";
         rend = GetComponent<Renderer>();
         deathTime = defaultDeathTime;
+        healthChange?.Invoke(health, maxHealth);
     }
 
     // Update is called once per frame

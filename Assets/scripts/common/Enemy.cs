@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
 
     public Damageable damageable;
     private Animator anim;
-    private Timer timer;
+    private STimer timer;
     Rigidbody2D body;
 
     public bool lockPosition = false;
@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour
         capsuleCollider2 = GetComponent<CapsuleCollider2D>();
         checkTouching = new CheckTouching();
         anim = GetComponent<Animator>();
-        timer = gameObject.AddComponent<Timer>();
+        timer = gameObject.AddComponent<STimer>();
     }
 
 }

@@ -31,9 +31,10 @@ public class PlayerController : MonoBehaviour
         {
             if (_isFacingRight != value)
             {
-                
+
                 if (damageable.IsAlive)
                 {
+                    IsReverseSide = false;
                     Methods.rotateBody(transform);
                 }
             }
@@ -56,7 +57,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 inputControll;
     private bool isWalking;
     private bool isShitfDonw;
-    private Timer timer;
+    private STimer timer;
     public int playerGroundState
     {
         get
@@ -80,7 +81,7 @@ public class PlayerController : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         bodyTouching = GetComponent<BodyTouching>();
-        timer = gameObject.AddComponent<Timer>();
+        timer = gameObject.AddComponent<STimer>();
     }
 
     // Update is called once per frame
@@ -98,10 +99,10 @@ public class PlayerController : MonoBehaviour
         int tNum = isFacingRight ? 1 : -1;
         anim.SetTrigger(AnimationString.IsJump);
         bodyTouching.playerAirState = (int)playerAirStateEnum.jumping;
-        //Methods.SmoothWallJump(body, tNum * 100, jumpHeight);
-        body.velocity = Vector2.Lerp(body.velocity, new Vector2(body.velocity.x + tNum * 100, body.velocity.y + jumpHeight), 3f);
+        body.velocity = new Vector2(tNum * 100, body.velocity.y + jumpHeight);
         bodyTouching.IsSideTouch = false;
         IsReverseSide = false;
+
     }
 
     /// <summary>
@@ -225,7 +226,7 @@ public class PlayerController : MonoBehaviour
 
     public void onJump(InputAction.CallbackContext context)
     {
-        if (!damageable.IsAlive)
+        if (!damageable.IsAlive || IsReverseSide)
         {
             return;
         }

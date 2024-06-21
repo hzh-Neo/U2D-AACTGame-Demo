@@ -5,7 +5,7 @@ using UnityEngine;
 public class HorizontalMove : MonoBehaviour
 {
     public float speed;
-    public float maxX=100;
+    public float maxX = 100;
     // Start is called before the first frame update
     void Start()
     {
