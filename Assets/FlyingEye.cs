@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class FlyingEye : MonoBehaviour
 {
@@ -87,10 +88,6 @@ public class FlyingEye : MonoBehaviour
     {
         lockPosition = true;
         anim.SetTrigger(FlyingEyeAnimations.hit);
-        if (detectionCheck && detectionCheck.EnterColliders2D.Count == 0 && !IsFarAttack)
-        {
-            Methods.rotateBody(transform);
-        }
         if (!hitTimer)
         {
             hitTimer = timer.StartTimer(hitTime, () =>
@@ -101,7 +98,7 @@ public class FlyingEye : MonoBehaviour
         }
     }
 
-    public void setMove(bool moving=false)
+    public void setMove(bool moving = false)
     {
         IsMoving = moving;
     }

@@ -12,13 +12,17 @@ public class Attack : MonoBehaviour
 
     public GameObject DestoryObj;
 
+    public GameObject AttackBody;
+
+    private bool CanAttack = true;
+
     [SerializeField]
     public Vector2 hitVect = Vector2.zero;
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Damageable damageable = collision.GetComponent<Damageable>();
-        if (damageable && damageable.IsAlive)
+        if (damageable && damageable.IsAlive && CanAttack)
         {
             damageable.onHit(AttackNum, hitVect, IsFarAttack);
             if (gameObject)
@@ -26,6 +30,11 @@ public class Attack : MonoBehaviour
                 Destroy(DestoryObj);
             }
         }
+    }
+
+    public void onDisabled()
+    {
+        CanAttack = false;
     }
 
 }

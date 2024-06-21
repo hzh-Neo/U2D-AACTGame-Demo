@@ -66,9 +66,16 @@ public class FindPlayer : MonoBehaviour
 
     private void moveTo(Vector3 targetPosition, float speed)
     {
-        if (capsuleCollider2 && !capsuleCollider2.damageable.IsAlive)
+        if (capsuleCollider2)
         {
-            return;
+            if (!capsuleCollider2.damageable.IsAlive)
+            {
+                return;
+            }
+            if (capsuleCollider2.lockPosition)
+            {
+                return;
+            }
         }
         Vector3 currentPosition = enemy.transform.position;
         Vector3 direction = (targetPosition - currentPosition).normalized; // 计算方向向量并归一化

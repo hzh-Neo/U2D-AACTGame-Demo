@@ -11,6 +11,8 @@ public class Damageable : MonoBehaviour
     public UnityEvent<float, Vector2,bool> unityEvent;
 
     public UnityEvent<float,float> healthChange;
+
+    public UnityEvent deathEvent;
     public float maxHealth
     {
         get
@@ -111,12 +113,13 @@ public class Damageable : MonoBehaviour
 
     private void TranslateDeath()
     {
-
+        deathEvent?.Invoke();
         toggleEnable();
         deathTime -= Time.deltaTime;
         if (deathTime <= 0)
         {
             rend.enabled = false;
+            Destroy(gameObject);
         }
     }
 
